@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Submit Report</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #f0f4ff; padding-bottom: 80px; }
+    .header { background: #1F3864; color: white; padding: 14px; font-size: 16px; font-weight: bold; }
+    .form-body { max-width: 400px; margin: 0 auto; padding: 16px; }
+    .steps { display: flex; gap: 8px; align-items: center; margin-bottom: 20px; }
+    .step { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold; }
+    .step.active { background: #2E5FA3; color: white; }
+    .step.done { background: #27ae60; color: white; }
+    .step.todo { background: #ccc; color: white; }
+    .step-line { flex: 1; height: 2px; background: #ccc; }
+    .map-box { background: #d0e8d0; border: 2px dashed #2E5FA3; height: 140px; display: flex; align-items: center; justify-content: center; border-radius: 8px; margin-bottom: 8px; color: #555; font-size: 14px; }
+    .warning { background: #fff8e8; border: 1px solid #EF9F27; padding: 8px 12px; border-radius: 6px; font-size: 12px; color: #854F0B; margin-bottom: 10px; }
+    input, textarea { width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; }
+    .photo-btn { background: #eee; border: 2px dashed #aaa; padding: 18px; text-align: center; border-radius: 8px; cursor: pointer; margin-bottom: 16px; font-size: 14px; }
+    .submit-btn { background: #27ae60; color: white; padding: 14px; width: 100%; border: none; border-radius: 10px; font-size: 16px; cursor: pointer; font-weight: bold; }
+    .submit-btn:hover { background: #219a52; }
+    label { font-size: 13px; color: #555; margin-bottom: 4px; display: block; }
+  </style>
+</head>
+<body>
+  <div class="header">⚡ Report: {{ category|default:"Issue" }}</div>
+  <div class="form-body">
+    <div class="steps">
+      <div class="step done">1</div>
+      <div class="step-line"></div>
+      <div class="step active">2</div>
+      <div class="step-line"></div>
+      <div class="step todo">3</div>
+    </div>
+    <p style="font-size:12px;color:#888;margin-bottom:16px;">Step 2 of 3 — Location &amp; Details</p>
+
+    {% if ref_number %}
+    <div style="background:#eaffea;border:1px solid #27ae60;padding:14px;border-radius:8px;margin-bottom:16px;">
+      <strong>✅ Report submitted!</strong><br>
+      Your reference number: <strong>{{ ref_number }}</strong><br>
+      <small>Save this number to track your report.</small>
+    </div>
+    {% endif %}
+
+    <form method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="category" value="{{ request.GET.category }}">
+      <div class="map-box">📍 GPS location detected — drag pin to adjust</div>
+      <div class="warning">⚠️ Location may be inaccurate indoors — drag pin to correct if needed</div>
+      <label>Or type your address:</label>
+      <input type="text" name="address" placeholder="e.g. 12 Fincham Street, Galeshewe">
+      <label>Describe the problem:</label>
+      <textarea name="description" rows="4" placeholder="e.g. Electricity has been off since 6am, longer than scheduled load shedding..."></textarea>
+      <div class="photo-btn">📷 Tap to add a photo</div>
+      <button type="submit" class="submit-btn">Submit Report</button>
+    </form>
+  </div>
+</body>
+</html>

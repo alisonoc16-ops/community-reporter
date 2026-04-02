@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Community Reporter</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #f0f4ff; }
+    .header { background: #1F3864; color: white; padding: 14px; text-align: center; font-size: 18px; font-weight: bold; }
+    .banner { background: #e74c3c; color: white; text-align: center; padding: 10px; font-size: 14px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 20px; max-width: 400px; margin: 0 auto; }
+    .tile { background: #2E5FA3; color: white; padding: 30px 10px; text-align: center; border-radius: 12px; font-size: 14px; text-decoration: none; display: block; }
+    .tile:hover { background: #1a3f7a; }
+    .tile span { display: block; font-size: 28px; margin-bottom: 8px; }
+    .nav { display: flex; justify-content: space-around; background: white; padding: 12px; border-top: 1px solid #ddd; position: fixed; bottom: 0; width: 100%; }
+    .nav a { text-decoration: none; color: #2E5FA3; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="header">Community Reporter</div>
+  <div class="banner">⚠️ Known Outages: Check latest updates</div>
+  <div class="grid">
+    <a href="/report/submit/?category=electricity" class="tile">
+      <span>⚡</span>Electricity
+    </a>
+    <a href="/report/submit/?category=water" class="tile">
+      <span>💧</span>Water
+    </a>
+    <a href="/report/submit/?category=roads" class="tile">
+      <span>🛣️</span>Roads
+    </a>
+    <a href="/report/submit/?category=waste" class="tile">
+      <span>🗑️</span>Waste
+    </a>
+  </div>
+  <div class="nav">
+    <a href="/">🏠 Home</a>
+    <a href="#">📋 My Reports</a>
+    <a href="#">🗺️ Map</a>
+    <a href="/accounts/profile/">👤 Profile</a>
+  </div>
+</body>
+</html>
